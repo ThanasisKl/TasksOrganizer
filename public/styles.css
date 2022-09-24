@@ -1,0 +1,12 @@
+body{
+    background-color: aquamarine;
+}
+
+#list {
+    list-style: none;
+    padding: 0;
+}
+
+#mainDiv{
+    background-color: aliceblue;
+}
