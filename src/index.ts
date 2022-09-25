@@ -1,4 +1,4 @@
-import {stringify, v4 as uuidV4} from "uuid";
+import {v4 as uuidV4} from "uuid";
 
 type Task = {
     id: string
@@ -7,35 +7,36 @@ type Task = {
     createdAt: Date
     date: Date
 };
+
+enum Task_Category {BEFORE,TODAY,UPCOMING};
   
-const list = document.querySelector<HTMLUListElement>("#list");
+const before_list = document.querySelector<HTMLUListElement>("#before_list");
+const today_list = document.querySelector<HTMLUListElement>("#today_list");
+const upcoming_list = document.querySelector<HTMLUListElement>("#upcoming_list");
 const form = document.getElementById("new-task-form") as HTMLFormElement | null;
 const input = document.querySelector<HTMLInputElement>("#new-task-title");
 let date_input = document.querySelector<HTMLInputElement>("#date")!;
 
-const date = new Date();
+const current_date = new Date();
 date_input.value = getCurrentDate();
-console.log("lol")
 
 const tasks: Task[] = loadTasks();
 tasks.forEach(addListItem);
 
-form?.addEventListener("submit", e => {
-    e.preventDefault();
-  
+form?.addEventListener("submit", event => {
     if (input?.value.trim() == "" || input?.value == null) return;
     date_input = document.querySelector<HTMLInputElement>("#date")!;
-    console.log(date_input.value)
 
     const newTask: Task = {
       id: uuidV4(),
       title: input.value,
       completed: false,
-      createdAt: new Date(),
+      createdAt: current_date,
       date: new Date(date_input.value)
     }
 
     tasks.push(newTask);
+    sortTasks();
     saveTasks();
   
     addListItem(newTask);
@@ -61,24 +62,47 @@ function addListItem(task: Task): void {
     label.append(checkbox, task.title);
     item.append(label);
     item.append(p);
-    list?.append(item);
+    const category_result = compareTasks(current_date, task.date);
+    if(category_result == Task_Category.BEFORE){
+        before_list?.append(item);
+    }else if(category_result == Task_Category.TODAY){
+        today_list?.append(item);
+    }else{
+        upcoming_list?.append(item);
+    }
 }
 
 function saveTasks() {
-    localStorage.setItem("TASKS", JSON.stringify(tasks))
+    localStorage.setItem("TASKS", JSON.stringify(tasks));
 }
   
 function loadTasks(): Task[] {
-    const taskJSON = localStorage.getItem("TASKS")
-    if (taskJSON == null) return []
-    return JSON.parse(taskJSON)
+    return sortTasks();
 }
 
 function getCurrentDate(): string{
-    const currentDate = new Date();
-    const day = new Date().getDate();
+    const day = (new Date()).getDate();
     const stringDay = day >= 10 ? `${day}` : `0${day}`;
-    const month = new Date().getMonth()+1;
+    const month = (new Date()).getMonth()+1;
     const stringMonth = month >= 10 ? `${month}` : `0${month}`;
-    return `${currentDate.getFullYear()}-${stringMonth}-${stringDay}`;
+    return `${(new Date()).getFullYear()}-${stringMonth}-${stringDay}`;
+}
+
+function sortTasks(): Task[]{
+    const taskJSON = localStorage.getItem("TASKS");
+    if (taskJSON == null) return [];
+
+    let tasks_array = JSON.parse(taskJSON);
+    tasks_array.sort(function(a: Task, b: Task) {
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+    });
+    return tasks_array;
+}
+
+function compareTasks(date1: Date,date2: Date): Task_Category{
+    date1 = new Date(date1);
+    date2 = new Date(date2);
+    if (date1.getDate() == date2.getDate() && date1.getMonth() == date2.getMonth() && date1.getFullYear() == date2.getFullYear())return Task_Category.TODAY;
+    if(date1.getTime() < date2.getTime()) return Task_Category.UPCOMING;
+    return Task_Category.BEFORE;
 }

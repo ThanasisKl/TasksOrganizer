@@ -1,5 +1,5 @@
 body{
-    background-color: aquamarine;
+    height: 100%;
 }
 
 #list {
@@ -8,5 +8,6 @@ body{
 }
 
 #mainDiv{
-    background-color: aliceblue;
+    background-color: rgb(151, 160, 169);
+    padding:30px;
 }
