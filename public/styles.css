@@ -2,12 +2,48 @@ body{
     height: 100%;
 }
 
-#list {
-    list-style: none;
-    padding: 0;
-}
-
 #mainDiv{
     background-color: rgb(151, 160, 169);
     padding:30px;
+}
+
+#tasks{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    background-color: blanchedalmond;
+    margin-bottom: 20px;
+}
+
+.lists{
+    display: flex;
+    flex-direction: column;
+    margin-right: 40px;
+    height: 10%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+#formDiv{
+    position:fixed;
+    width: 50%;
+    bottom: 5px;
+    border: 3px solid ;
+    width: 100%;
+    background-color: rgb(192, 173, 150);
+    visibility:hidden;
+}
+
+#addBtnDiv{
+    position:fixed;
+    bottom: 5%;
+    width: 100%;
+    text-align: right;
+}
+
+#addBtn{
+    margin-right: 7%;
 }

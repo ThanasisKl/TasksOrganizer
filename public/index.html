@@ -10,22 +10,32 @@
 </head>
 <body>
   <div id="mainDiv">
-    <ul id="list">
-      <h2 class="headings">Previous Day</h2>
-      <ul id="before_list"></ul>
+    <div id="tasks">
+      <div class="lists">
+        <h2 class="headings">Previous Days</h2>
+        <ul id="before_list"></ul>
+      </div>
+      
+      <div class="lists">
+        <h2 class="headings">Today</h2>
+        <ul id="today_list"></ul>
+      </div>
 
-      <h2 class="headings">Today</h2>
-      <ul id="today_list"></ul>
-
-      <h2 class="headings">Upcoming</h2>
-      <ul id="upcoming_list"></ul>
-    </ul>
-    <form id="new-task-form">
-      <input type="text" id="new-task-title">
-      <label for="date">Date:</label>
-      <input type="date" id="date" name="date">
-      <button type="submit">Add</button>
-    </form>
+      <div class="lists">
+        <h2 class="headings">Upcoming</h2>
+        <ul id="upcoming_list"></ul>
+      </div>
+    </div>
+    <div id="addBtnDiv">
+      <button id="addBtn">Add</button>
+    </div>
+    <div id="formDiv">
+      <form id="new-task-form">
+        <input type="text" id="new-task-title">
+        <input type="date" id="date" name="date">
+        <button type="submit">Add</button>
+      </form>
+    </div>
   </div>
 </body>
 </html>

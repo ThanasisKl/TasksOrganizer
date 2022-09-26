@@ -15,6 +15,8 @@ const today_list = document.querySelector<HTMLUListElement>("#today_list");
 const upcoming_list = document.querySelector<HTMLUListElement>("#upcoming_list");
 const form = document.getElementById("new-task-form") as HTMLFormElement | null;
 const input = document.querySelector<HTMLInputElement>("#new-task-title");
+const addButton = document.getElementById("addBtn") as HTMLButtonElement;
+const formDiv = document.getElementById("formDiv") as HTMLDivElement;
 let date_input = document.querySelector<HTMLInputElement>("#date")!;
 
 const current_date = new Date();
@@ -22,6 +24,11 @@ date_input.value = getCurrentDate();
 
 const tasks: Task[] = loadTasks();
 tasks.forEach(addListItem);
+
+addButton?.addEventListener("click", () => {
+    addButton.style.visibility = "hidden";
+    formDiv.style.visibility = "visible";
+});
 
 form?.addEventListener("submit", event => {
     if (input?.value.trim() == "" || input?.value == null) return;
@@ -41,6 +48,9 @@ form?.addEventListener("submit", event => {
   
     addListItem(newTask);
     input.value = "";
+
+    addButton.style.visibility = "visible";
+    formDiv.style.visibility = "hidden";
   })
 
 function addListItem(task: Task): void {
