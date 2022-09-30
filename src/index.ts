@@ -57,7 +57,8 @@ function addListItem(task: Task): void {
     const item = document.createElement("li");
     const label = document.createElement("label");
     const checkbox = document.createElement("input");
-    const p = document.createElement("p");
+    const span = document.createElement("span");
+    const div = document.createElement("div");
 
     const task_date = new Date(task.date);
 
@@ -68,10 +69,11 @@ function addListItem(task: Task): void {
 
     checkbox.type = "checkbox";
     checkbox.checked = task.completed;
-    p.textContent = `${task_date.getDate()}-${task_date.getMonth()+1}-${task_date.getFullYear()}`;
+    span.textContent = `${task_date.getDate()}-${task_date.getMonth()+1}-${task_date.getFullYear()}`;
     label.append(checkbox, task.title);
     item.append(label);
-    item.append(p);
+    div.append(span);
+    item.append(div);
     const category_result = compareTasks(current_date, task.date);
     if(category_result == Task_Category.BEFORE){
         before_list?.append(item);

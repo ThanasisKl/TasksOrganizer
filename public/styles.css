@@ -1,9 +1,30 @@
+:root {
+    --headerColor: #1e90ff;
+    --mainColor: #ffffff;
+    --borderColor: grey;
+    --footerColor: rgb(192, 173, 150);
+    --blackColor:black;
+    --checkboxColor: blue;
+    --hoverBtnColor: rgb(199, 199, 199);
+}
+
 body{
     height: 100%;
+    background-color:  var(--footerColor);
+}
+
+h2{
+    letter-spacing: 5px;
+    margin-bottom: 30px;
+}
+
+label{
+    display:flex; 
+    justify-content:left; 
 }
 
 #mainDiv{
-    background-color: rgb(151, 160, 169);
+    background-color: var(--mainColor);
     padding:30px;
 }
 
@@ -12,15 +33,18 @@ body{
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    background-color: blanchedalmond;
+    background-color:  var(--mainColor);
     margin-bottom: 20px;
 }
 
 .lists{
     display: flex;
     flex-direction: column;
+    align-items:baseline;
     margin-right: 40px;
-    height: 10%;
+    border: var(--borderColor) solid 2px;
+    border-radius: 5%;
+    width: 30%;
 }
 
 ul {
@@ -33,7 +57,7 @@ ul {
     bottom: 5px;
     border: 3px solid ;
     width: 100%;
-    background-color: rgb(192, 173, 150);
+    background-color: var(--footerColor);
     visibility:hidden;
 }
 
@@ -46,4 +70,40 @@ ul {
 
 #addBtn{
     margin-right: 7%;
+    border-radius: 50%;
+    border: 3px solid var(--blackColor);
+    background-color: transparent;
+    width:2em;
+    height: 2em;
+    font-size: 2em;
+}
+
+#addBtn:hover{
+    background-color: var(--hoverBtnColor);
+}
+
+#addBtn:active{
+    width: 2.3em;
+    height: 2.3em;
+}
+
+header{
+    background-color: var(--headerColor);
+    padding-bottom: 15px;
+}
+
+input[type="checkbox"] {
+    width: 1.15em;
+    height: 1.15em;
+    margin-right:10px;
+    accent-color: var(--checkboxColor);
+}
+
+div ul span{
+    color: var(--borderColor);
+}
+
+.lists li{
+    border-bottom: var(--borderColor) solid 2px;
+    margin-bottom: 15px;
 }
