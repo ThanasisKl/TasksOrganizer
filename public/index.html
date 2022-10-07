@@ -15,18 +15,20 @@
 </head>
 <body>
   <header>
-    <h1 class="ml-3">To-Do List</h1>
+    <h1 class="ml-4 pt-2">My To-Do</h1>
     <div class="text-right">
-      <span class="mr-4">Organize your thoughts</span>
+      <span class="mr-4" id="slogan">Create your everyday plan</span>
     </div>
   </header>
-  <div id="mainDiv">
+  <main>
     <div id="tasks">
-      <div class="lists">
-        <div class="w-100 text-center">
-          <h2 class="headings">Previous Days</h2>
+      <div class="lists2">
+        <div class="lists">
+          <div class="w-100 text-center">
+            <h2 class="headings">Previous Days</h2>
+          </div>
+          <ul id="before_list" class="m-0 p-0 ml-3 mr-3"></ul>
         </div>
-        <ul id="before_list" class="m-0 p-0 ml-3 mr-3"></ul>
       </div>
       
       <div class="lists">
@@ -53,6 +55,7 @@
         <button type="submit">Add</button>
       </form>
     </div>
-  </div>
+    <!-- <button class="deleteBtn"><i class="fa-solid fa-trash-can"></i></button> -->
+  </main>
 </body>
 </html>

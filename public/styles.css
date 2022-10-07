@@ -1,11 +1,17 @@
 :root {
-    --headerColor: #1e90ff;
+    /*colors*/
+    --white:#fff;
     --mainColor: #ffffff;
-    --borderColor: grey;
-    --footerColor: rgb(192, 173, 150);
+    --borderColor: #2b1055;
+    --footerColor: #fff;
     --blackColor:black;
-    --checkboxColor: blue;
+    --checkboxColor: #7597de;
     --hoverBtnColor: rgb(199, 199, 199);
+    --addBtnColor: #2b1055;
+    --headingColor:#2b1055;
+    /*fonts*/
+    --pageNameFonts:cursive, Arial, sans-serif;
+    --sloganFonts:Verdana, Helvetica, sans-serif;
 }
 
 body{
@@ -13,9 +19,12 @@ body{
     background-color:  var(--footerColor);
 }
 
-h2{
+.headings{
     letter-spacing: 5px;
     margin-bottom: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: var(--headingColor);
 }
 
 label{
@@ -23,7 +32,14 @@ label{
     justify-content:left; 
 }
 
-#mainDiv{
+header h1{
+   font-family: var(--pageNameFonts); 
+}
+
+header span{
+    font-family: var(--sloganFonts);
+}
+main{
     background-color: var(--mainColor);
     padding:30px;
 }
@@ -42,10 +58,12 @@ label{
     flex-direction: column;
     align-items:baseline;
     margin-right: 40px;
-    border: var(--borderColor) solid 2px;
+    margin-top: 40px;
+    border: var(--borderColor) solid 3px;
     border-radius: 5%;
-    width: 30%;
+    width: fit-content;
 }
+
 
 ul {
     list-style-type: none;
@@ -71,7 +89,8 @@ ul {
 #addBtn{
     margin-right: 7%;
     border-radius: 50%;
-    border: 3px solid var(--blackColor);
+    border: 3px solid var(--addBtnColor);
+    color: var(--addBtnColor);
     background-color: transparent;
     width:2em;
     height: 2em;
@@ -88,8 +107,9 @@ ul {
 }
 
 header{
-    background-color: var(--headerColor);
     padding-bottom: 15px;
+    background: linear-gradient(to right,#2b1055,#7597de);
+    color: var(--white);
 }
 
 input[type="checkbox"] {
@@ -106,4 +126,15 @@ div ul span{
 .lists li{
     border-bottom: var(--borderColor) solid 2px;
     margin-bottom: 15px;
+    padding-bottom: 30px;
+}
+
+.deleteBtn{
+    color:var(--white);
+    background-color: red;
+    border: var(--borderColor) solid 2px ;
+    border-radius: 5px;
+    float: right;
+    padding: 2px 20px;
+    font-size: 1.1em;
 }

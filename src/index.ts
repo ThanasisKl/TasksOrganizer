@@ -30,6 +30,8 @@ addButton?.addEventListener("click", () => {
     formDiv.style.visibility = "visible";
 });
 
+
+
 form?.addEventListener("submit", event => {
     if (input?.value.trim() == "" || input?.value == null) return;
     date_input = document.querySelector<HTMLInputElement>("#date")!;
@@ -59,6 +61,11 @@ function addListItem(task: Task): void {
     const checkbox = document.createElement("input");
     const span = document.createElement("span");
     const div = document.createElement("div");
+    const button = document.createElement("button");
+    const i = document.createElement("i");
+    i.classList.add('fa-solid','fa-trash-can');
+    button.classList.add('deleteBtn');
+    button.setAttribute('id', task.id);
 
     const task_date = new Date(task.date);
 
@@ -70,11 +77,13 @@ function addListItem(task: Task): void {
     checkbox.type = "checkbox";
     checkbox.checked = task.completed;
     span.textContent = `${task_date.getDate()}-${task_date.getMonth()+1}-${task_date.getFullYear()}`;
+    button.appendChild(i);
     label.append(checkbox, task.title);
     item.append(label);
     div.append(span);
+    div.append(button);
     item.append(div);
-    const category_result = compareTasks(current_date, task.date);
+    const category_result = compareTasks(current_date, task.date); 
     if(category_result == Task_Category.BEFORE){
         before_list?.append(item);
     }else if(category_result == Task_Category.TODAY){
