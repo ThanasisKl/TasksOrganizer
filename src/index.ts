@@ -30,7 +30,14 @@ addButton?.addEventListener("click", () => {
     formDiv.style.visibility = "visible";
 });
 
-
+const deleteBtns = document.getElementsByClassName("deleteBtn") as HTMLCollectionOf<HTMLButtonElement>;
+if (deleteBtns != null){
+    for(let i=0;i<deleteBtns.length;i++){
+        deleteBtns[i].addEventListener("click", () => {
+            console.log(deleteTask(deleteBtns[i].id))
+        });
+    }
+}
 
 form?.addEventListener("submit", event => {
     if (input?.value.trim() == "" || input?.value == null) return;
@@ -62,8 +69,10 @@ function addListItem(task: Task): void {
     const span = document.createElement("span");
     const div = document.createElement("div");
     const button = document.createElement("button");
+    const form = document.createElement("form");
     const i = document.createElement("i");
     i.classList.add('fa-solid','fa-trash-can');
+    button.type = "submit";
     button.classList.add('deleteBtn');
     button.setAttribute('id', task.id);
 
@@ -78,10 +87,11 @@ function addListItem(task: Task): void {
     checkbox.checked = task.completed;
     span.textContent = `${task_date.getDate()}-${task_date.getMonth()+1}-${task_date.getFullYear()}`;
     button.appendChild(i);
+    form.appendChild(button);
     label.append(checkbox, task.title);
     item.append(label);
     div.append(span);
-    div.append(button);
+    div.append(form);
     item.append(div);
     const category_result = compareTasks(current_date, task.date); 
     if(category_result == Task_Category.BEFORE){
@@ -126,4 +136,13 @@ function compareTasks(date1: Date,date2: Date): Task_Category{
     if (date1.getDate() == date2.getDate() && date1.getMonth() == date2.getMonth() && date1.getFullYear() == date2.getFullYear())return Task_Category.TODAY;
     if(date1.getTime() < date2.getTime()) return Task_Category.UPCOMING;
     return Task_Category.BEFORE;
+}
+
+function deleteTask(taskId : string): void{
+    let tasks = loadTasks();
+    console.log(taskId)
+    console.log(tasks);
+    const newTasks = tasks.filter(task => task.id !== taskId);
+    console.log(newTasks);
+    localStorage.setItem("TASKS", JSON.stringify(newTasks));
 }

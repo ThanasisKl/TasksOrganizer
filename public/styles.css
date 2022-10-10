@@ -1,14 +1,13 @@
 :root {
     /*colors*/
     --white:#fff;
-    --mainColor: #ffffff;
-    --borderColor: #2b1055;
-    --footerColor: #fff;
+    --mainColor: #2b1055;
     --blackColor:black;
     --checkboxColor: #7597de;
-    --hoverBtnColor: rgb(199, 199, 199);
-    --addBtnColor: #2b1055;
-    --headingColor:#2b1055;
+    --hoverBtnColor: rgb(149, 149, 149);
+    --addBtnColor: rgb(199, 199, 199);
+    --deleteBtnColor:rgb(167, 13, 13);
+    --newTaskBtnColor: #7597de;
     /*fonts*/
     --pageNameFonts:cursive, Arial, sans-serif;
     --sloganFonts:Verdana, Helvetica, sans-serif;
@@ -16,15 +15,20 @@
 
 body{
     height: 100%;
-    background-color:  var(--footerColor);
+    background-color:  var(--white);
 }
 
-.headings{
-    letter-spacing: 5px;
-    margin-bottom: 30px;
-    margin-left: 10px;
-    margin-right: 10px;
-    color: var(--headingColor);
+header h1{
+    font-family: var(--pageNameFonts); 
+}
+ 
+header span{
+     font-family: var(--sloganFonts);
+}
+
+main{
+     background-color: var(--white);
+     padding:30px;
 }
 
 label{
@@ -32,78 +36,8 @@ label{
     justify-content:left; 
 }
 
-header h1{
-   font-family: var(--pageNameFonts); 
-}
-
-header span{
-    font-family: var(--sloganFonts);
-}
-main{
-    background-color: var(--mainColor);
-    padding:30px;
-}
-
-#tasks{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    background-color:  var(--mainColor);
-    margin-bottom: 20px;
-}
-
-.lists{
-    display: flex;
-    flex-direction: column;
-    align-items:baseline;
-    margin-right: 40px;
-    margin-top: 40px;
-    border: var(--borderColor) solid 3px;
-    border-radius: 5%;
-    width: fit-content;
-}
-
-
 ul {
     list-style-type: none;
-}
-
-#formDiv{
-    position:fixed;
-    width: 50%;
-    bottom: 5px;
-    border: 3px solid ;
-    width: 100%;
-    background-color: var(--footerColor);
-    visibility:hidden;
-}
-
-#addBtnDiv{
-    position:fixed;
-    bottom: 5%;
-    width: 100%;
-    text-align: right;
-}
-
-#addBtn{
-    margin-right: 7%;
-    border-radius: 50%;
-    border: 3px solid var(--addBtnColor);
-    color: var(--addBtnColor);
-    background-color: transparent;
-    width:2em;
-    height: 2em;
-    font-size: 2em;
-}
-
-#addBtn:hover{
-    background-color: var(--hoverBtnColor);
-}
-
-#addBtn:active{
-    width: 2.3em;
-    height: 2.3em;
 }
 
 header{
@@ -120,21 +54,110 @@ input[type="checkbox"] {
 }
 
 div ul span{
-    color: var(--borderColor);
+    color: var(--mainColor);
+    margin-right: 50px;
+}
+
+.headings{
+    letter-spacing: 5px;
+    margin-bottom: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: var(--mainColor);
+}
+
+.lists{
+    display: flex;
+    flex-direction: column;
+    align-items:baseline;
+    margin-right: 40px;
+    margin-top: 40px;
+    border: var(--mainColor) solid 3px;
+    border-radius: 5%;
+    width: fit-content;
 }
 
 .lists li{
-    border-bottom: var(--borderColor) solid 2px;
+    border-bottom: var(--mainColor) solid 2px;
     margin-bottom: 15px;
     padding-bottom: 30px;
 }
 
 .deleteBtn{
     color:var(--white);
-    background-color: red;
-    border: var(--borderColor) solid 2px ;
+    background-color: var(--deleteBtnColor);
+    border: var(--mainColor) solid 2px ;
     border-radius: 5px;
     float: right;
     padding: 2px 20px;
     font-size: 1.1em;
+}
+
+.form{
+    border: var(--mainColor) solid 2px ;
+    border-radius: 5px;
+    height: 2.8em;
+}
+
+#tasks form{
+    display: inline;
+}
+
+#addBtn:hover{
+    background-color: var(--hoverBtnColor);
+}
+
+#addBtn:active{
+    width: 2.3em;
+    height: 2.3em;
+}
+
+#formDiv{
+    position:fixed;
+    width: 50%;
+    bottom: 20px;
+    width: 100%;
+    visibility:hidden;
+}
+
+#addBtnDiv{
+    position:fixed;
+    bottom: 5%;
+    width: 100%;
+    text-align: right;
+}
+
+#addBtn{
+    margin-right: 7%;
+    border-radius: 50%;
+    border: 3px solid var(--mainColor);
+    color: var(--mainColor);
+    background-color: var(--addBtnColor);
+    width:2em;
+    height: 2em;
+    font-size: 2em;
+}
+
+#tasks{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    background-color:  var(--white);
+    margin-bottom: 20px;
+}
+
+#new-task-title{
+    width: 50%;
+}
+
+#new-task-form button{
+    background-color: var(--newTaskBtnColor);
+    font-weight: 500;
+}
+
+#new-task-form button:hover{
+    background-color: var(--mainColor);
+    color: var(--white);
+    font-weight: 500;
 }

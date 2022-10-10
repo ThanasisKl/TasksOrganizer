@@ -15,7 +15,7 @@
 </head>
 <body>
   <header>
-    <h1 class="ml-4 pt-2">My To-Do</h1>
+    <h1 class="ml-4 pt-2">My Scheduler</h1>
     <div class="text-right">
       <span class="mr-4" id="slogan">Create your everyday plan</span>
     </div>
@@ -27,7 +27,10 @@
           <div class="w-100 text-center">
             <h2 class="headings">Previous Days</h2>
           </div>
-          <ul id="before_list" class="m-0 p-0 ml-3 mr-3"></ul>
+          <div class="w-100">
+            <ul id="before_list" class="m-0 p-0 ml-3 mr-3"></ul>
+          </div>
+          
         </div>
       </div>
       
@@ -35,14 +38,18 @@
         <div class="w-100 text-center">
           <h2 class="headings">Today</h2>
         </div>
-        <ul id="today_list" class="m-0 p-0 ml-3 mr-3"></ul>
+        <div class="w-100">
+          <ul id="today_list" class="m-0 p-0 ml-3 mr-3"></ul>
+        </div>
       </div>
 
       <div class="lists">
         <div class="w-100 text-center">
           <h2 class="headings">Upcoming</h2>
         </div>
-        <ul id="upcoming_list" class="m-0 p-0 ml-3 mr-3"></ul>
+        <div class="w-100">
+          <ul id="upcoming_list" class="m-0 p-0 ml-3 mr-3"></ul>
+        </div>
       </div>
     </div>
     <div id="addBtnDiv">
@@ -50,12 +57,11 @@
     </div>
     <div id="formDiv">
       <form id="new-task-form">
-        <input type="text" id="new-task-title">
-        <input type="date" id="date" name="date">
-        <button type="submit">Add</button>
+        <input type="text" id="new-task-title" class="mr-3 form">
+        <input type="date" id="date" name="date" class="px-1 form mr-5">
+        <button type="submit" class="form px-4">ADD</button>
       </form>
     </div>
-    <!-- <button class="deleteBtn"><i class="fa-solid fa-trash-can"></i></button> -->
   </main>
 </body>
 </html>
