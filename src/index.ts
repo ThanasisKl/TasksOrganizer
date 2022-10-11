@@ -15,6 +15,7 @@ const today_list = document.querySelector<HTMLUListElement>("#today_list");
 const upcoming_list = document.querySelector<HTMLUListElement>("#upcoming_list");
 const form = document.getElementById("new-task-form") as HTMLFormElement | null;
 const input = document.querySelector<HTMLInputElement>("#new-task-title");
+const xButton = document.querySelector<HTMLButtonElement>("#x-button");
 const addButton = document.getElementById("addBtn") as HTMLButtonElement;
 const formDiv = document.getElementById("formDiv") as HTMLDivElement;
 let date_input = document.querySelector<HTMLInputElement>("#date")!;
@@ -25,21 +26,27 @@ date_input.value = getCurrentDate();
 const tasks: Task[] = loadTasks();
 tasks.forEach(addListItem);
 
-addButton?.addEventListener("click", () => {
+addButton?.addEventListener("click", (event) => {  //when click + button makes the form visible
+    event.preventDefault();  // don't refresh the page
     addButton.style.visibility = "hidden";
     formDiv.style.visibility = "visible";
 });
 
+xButton?.addEventListener("click", (event) => { // when click x button makes the form invisible
+    event.preventDefault();
+    addButton.style.visibility = "visible";
+    formDiv.style.visibility = "hidden";
+});
 const deleteBtns = document.getElementsByClassName("deleteBtn") as HTMLCollectionOf<HTMLButtonElement>;
 if (deleteBtns != null){
-    for(let i=0;i<deleteBtns.length;i++){
+    for(let i=0;i<deleteBtns.length;i++){   // adding event listeners to every delete buttton
         deleteBtns[i].addEventListener("click", () => {
             console.log(deleteTask(deleteBtns[i].id))
         });
     }
 }
 
-form?.addEventListener("submit", event => {
+form?.addEventListener("submit", event => {   // event listener for adding new task
     if (input?.value.trim() == "" || input?.value == null) return;
     date_input = document.querySelector<HTMLInputElement>("#date")!;
 
@@ -62,7 +69,7 @@ form?.addEventListener("submit", event => {
     formDiv.style.visibility = "hidden";
   })
 
-function addListItem(task: Task): void {
+function addListItem(task: Task): void {     // adds new list item in the screen using vanilla js
     const item = document.createElement("li");
     const label = document.createElement("label");
     const checkbox = document.createElement("input");
@@ -78,8 +85,12 @@ function addListItem(task: Task): void {
 
     const task_date = new Date(task.date);
 
-    checkbox.addEventListener("change", () => {
-    task.completed = checkbox.checked
+    checkbox.addEventListener("change", () => {   // event listener for change in the checkbox
+        task.completed = checkbox.checked;
+        if(task.completed){
+            const taskCompletedSound = new Audio('./sounds/bell-ring.mp3');
+            taskCompletedSound.play();
+        }
         saveTasks();
     });
 
@@ -103,7 +114,7 @@ function addListItem(task: Task): void {
     }
 }
 
-function saveTasks() {
+function saveTasks(): void {
     localStorage.setItem("TASKS", JSON.stringify(tasks));
 }
   
@@ -111,7 +122,7 @@ function loadTasks(): Task[] {
     return sortTasks();
 }
 
-function getCurrentDate(): string{
+function getCurrentDate(): string{    // returns the current date
     const day = (new Date()).getDate();
     const stringDay = day >= 10 ? `${day}` : `0${day}`;
     const month = (new Date()).getMonth()+1;
@@ -119,7 +130,7 @@ function getCurrentDate(): string{
     return `${(new Date()).getFullYear()}-${stringMonth}-${stringDay}`;
 }
 
-function sortTasks(): Task[]{
+function sortTasks(): Task[]{        //sorts the tasks based on date
     const taskJSON = localStorage.getItem("TASKS");
     if (taskJSON == null) return [];
 
@@ -130,7 +141,7 @@ function sortTasks(): Task[]{
     return tasks_array;
 }
 
-function compareTasks(date1: Date,date2: Date): Task_Category{
+function compareTasks(date1: Date,date2: Date): Task_Category{   // compares two dates
     date1 = new Date(date1);
     date2 = new Date(date2);
     if (date1.getDate() == date2.getDate() && date1.getMonth() == date2.getMonth() && date1.getFullYear() == date2.getFullYear())return Task_Category.TODAY;
@@ -138,7 +149,7 @@ function compareTasks(date1: Date,date2: Date): Task_Category{
     return Task_Category.BEFORE;
 }
 
-function deleteTask(taskId : string): void{
+function deleteTask(taskId : string): void{   //deleted a task from local storage
     let tasks = loadTasks();
     console.log(taskId)
     console.log(tasks);

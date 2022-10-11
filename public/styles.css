@@ -8,6 +8,7 @@
     --addBtnColor: rgb(199, 199, 199);
     --deleteBtnColor:rgb(167, 13, 13);
     --newTaskBtnColor: #7597de;
+    --formBackgroundColor: rgb(196, 196, 196);
     /*fonts*/
     --pageNameFonts:cursive, Arial, sans-serif;
     --sloganFonts:Verdana, Helvetica, sans-serif;
@@ -114,10 +115,11 @@ div ul span{
 
 #formDiv{
     position:fixed;
-    width: 50%;
     bottom: 20px;
-    width: 100%;
+    width: 96%;
     visibility:hidden;
+    background-color: var(--formBackgroundColor);
+    border-radius: 10px;
 }
 
 #addBtnDiv{
@@ -159,5 +161,11 @@ div ul span{
 #new-task-form button:hover{
     background-color: var(--mainColor);
     color: var(--white);
-    font-weight: 500;
+    font-weight: 700;
+}
+
+#x-button{
+    float:right;
+    border-radius: 40%;
+    border: 2px solid var(--mainColor);
 }
